@@ -1,3 +1,4 @@
+// 아래 모듈들을 npm에서 다운로드 해주어야 함
 import localforage from "localforage";
 import { matchSorter } from "match-sorter";
 import sortBy from "sort-by";
@@ -12,6 +13,10 @@ export async function getContacts(query) {
   return contacts.sort(sortBy("last", "createdAt"));
 }
 
+/**
+ * 이름이나 데이터 등이 없는 빈 연락처를 생성
+ * 기록이 남음
+ */
 export async function createContact() {
   await fakeNetwork();
   let id = Math.random().toString(36).substring(2, 9);
