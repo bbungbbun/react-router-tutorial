@@ -1,6 +1,21 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 
-// Outlet - children component가 출력되는 위치
+/**
+ * Outlet 
+ * - children component가 출력되는 위치  
+ * */ 
+
+/**
+ * Link 
+ * - 클라이언트 측 라우팅을 사용
+ * - 앱이 서버에서 다른 문서를 요청하지 않고도 URL을 업데이트
+ * - 대신 앱은 새 UI를 즉시 렌더링 가능
+ * - 브라우저 개발자 도구에서 네트워크 탭을 열어 더 이상 문서를 요청하지 않는지 확인할 수 있음
+ * 
+ * - Link가 아닌 a 태그를 활용하는 경우
+ * - React Router를 사용하는 대신 다음 URL에 대한 전체 문서 요청을 수행
+ */
+
 export default function Root() {
     return (
       <>
@@ -32,10 +47,10 @@ export default function Root() {
           <nav>
             <ul>
               <li>
-                <a href={`/contacts/1`}>Your Name</a>
+              <Link to={`contacts/1`}>Your Name</Link>
               </li>
               <li>
-                <a href={`/contacts/2`}>Your Friend</a>
+              <Link to={`contacts/2`}>Your Friend</Link>
               </li>
             </ul>
           </nav>
