@@ -1,3 +1,6 @@
+import { Outlet } from "react-router-dom";
+
+// Outlet - children component가 출력되는 위치
 export default function Root() {
     return (
       <>
@@ -37,7 +40,9 @@ export default function Root() {
             </ul>
           </nav>
         </div>
-        <div id="detail"></div>
+        <div id="detail">
+          <Outlet />
+        </div>
       </>
     );
   }
