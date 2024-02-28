@@ -93,7 +93,11 @@ export default function Root() {
                 name="q" // 검색 시에 파라미터 이름 설정
                 defaultValue={q} // 검색 후 새로 고침했을 때 검색창에 이전에 검색했던 내용이 남음
                 onChange={(event) => {
-                  submit(event.currentTarget.form);
+                  const isFirstSearch = q == null;
+                  submit(event.currentTarget.form, {
+                    replace: !isFirstSearch,
+                  });
+                  // 값이 변경될 때마다 검색되므로 많은 검색 기록이 남는 것을 방지
                 }}
               />
               <div
