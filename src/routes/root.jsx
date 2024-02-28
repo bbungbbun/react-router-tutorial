@@ -51,7 +51,7 @@ export default function Root() {
                 aria-label="Search contacts"
                 placeholder="Search"
                 type="search"
-                name="q"
+                name="q" // 검색 시에 파라미터 이름 설정
               />
               <div
                 id="search-spinner"
