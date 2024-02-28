@@ -14,6 +14,13 @@ export async function action({ request, params }) {
 
 export async function loader({ params }) {
   const contact = await getContact(params.contactId);
+  if (!contact) {
+    throw new Response("", {
+      status: 404,
+      statusText: "Not Found",
+    });
+  }
+  // 연락처를 찾을 수 없는 경우 더욱 자세한 오류메시지 반환
   return { contact };
 }
 
