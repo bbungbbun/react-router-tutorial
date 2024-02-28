@@ -17,7 +17,7 @@ export async function loader({ request }) {
   const url = new URL(request.url);
   const q = url.searchParams.get("q");
   const contacts = await getContacts(q);
-  return { contacts };
+  return { contacts, q };
 }
 
 /**
@@ -37,7 +37,7 @@ export async function loader({ request }) {
  */
 
 export default function Root() {
-  const { contacts } = useLoaderData();
+  const { contacts, q } = useLoaderData();
   const navigation = useNavigation();
   /**
    * useLoaderData 후크가 업데이트되고 UI가 자동으로 데이터와 동기화 상태를 유지
@@ -57,6 +57,7 @@ export default function Root() {
                 placeholder="Search"
                 type="search"
                 name="q" // 검색 시에 파라미터 이름 설정
+                defaultValue={q} // 검색 후 새로 고침했을 때 검색창에 이전에 검색했던 내용이 남음
               />
               <div
                 id="search-spinner"
