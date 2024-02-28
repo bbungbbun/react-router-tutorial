@@ -5,6 +5,7 @@ import {
   Form,
   redirect,
   useNavigation,
+  useSubmit,
 } from "react-router-dom";
 import { getContacts, createContact } from "../contacts";
 import { useEffect } from "react";
@@ -39,10 +40,18 @@ export async function loader({ request }) {
 
 export default function Root() {
   const { contacts, q } = useLoaderData();
-  const navigation = useNavigation();
   /**
    * useLoaderData 후크가 업데이트되고 UI가 자동으로 데이터와 동기화 상태를 유지
    */
+
+  const navigation = useNavigation();
+  const submit = useSubmit();
+
+  /**
+   * useSubmit 후크
+   * 검색창의 값이 변경될 때마다 검색어를 제출함
+  */
+
 
   useEffect(() => {
     document.getElementById("q").value = q;
@@ -70,6 +79,9 @@ export default function Root() {
                 type="search"
                 name="q" // 검색 시에 파라미터 이름 설정
                 defaultValue={q} // 검색 후 새로 고침했을 때 검색창에 이전에 검색했던 내용이 남음
+                onChange={(event) => {
+                  submit(event.currentTarget.form);
+                }}
               />
               <div
                 id="search-spinner"
