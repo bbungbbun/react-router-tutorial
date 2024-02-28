@@ -29,24 +29,29 @@ const router = createBrowserRouter([
     loader: rootLoader,
     action: rootAction,
     children: [
-      { index: true, element: <Index /> },
       {
-        path: "contacts/:contactId",
-        element: <Contact />,
-        loader: contactLoader,
-        action: contactAction,
-
-      },
-      {
-        path: "contacts/:contactId/edit",
-        element: <EditContact />,
-        loader: contactLoader,
-        action: editAction,
-      },
-      {
-        path: "contacts/:contactId/destroy",
-        action: destroyAction,
-        errorElement: <div>Oops! There was an error.</div>, // root element 내부에서 에러 페이지 표시
+        errorElement: <ErrorPage />, // 루트페이지 내부에 에러페이지 표시
+        children: [
+          { index: true, element: <Index /> },
+          {
+            path: "contacts/:contactId",
+            element: <Contact />,
+            loader: contactLoader,
+            action: contactAction,
+    
+          },
+          {
+            path: "contacts/:contactId/edit",
+            element: <EditContact />,
+            loader: contactLoader,
+            action: editAction,
+          },
+          {
+            path: "contacts/:contactId/destroy",
+            action: destroyAction,
+            errorElement: <div>Oops! There was an error.</div>, // root element 내부에서 에러 페이지 표시
+          },
+        ],
       },
     ],
   },
