@@ -40,6 +40,7 @@ const router = createBrowserRouter([
       {
         path: "contacts/:contactId/destroy",
         action: destroyAction,
+        errorElement: <div>Oops! There was an error.</div>, // root element 내부에서 에러 페이지 표시
       },
     ],
   },
