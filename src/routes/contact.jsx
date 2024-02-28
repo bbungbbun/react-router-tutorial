@@ -1,5 +1,16 @@
-import { Form, useLoaderData } from "react-router-dom";
-import { getContact } from "../contacts";
+import {
+  useLoaderData,
+  Form,
+  useFetcher,
+} from "react-router-dom";
+import { getContact, updateContact } from "../contacts";
+
+export async function action({ request, params }) {
+  let formData = await request.formData();
+  return updateContact(params.contactId, {
+    favorite: formData.get("favorite") === "true",
+  });
+}
 
 export async function loader({ params }) {
   const contact = await getContact(params.contactId);
@@ -69,10 +80,23 @@ export default function Contact() {
 }
 
 function Favorite({ contact }) {
-  // yes, this is a `let` for later
+  const fetcher = useFetcher();
+  /**
+   * useFetcher
+   * 지금까지 사용했던 <Form>과 거의 동일하게 작동
+   * 
+   * 공통점: 
+   * 액션을 호출한 다음 모든 데이터가 자동으로 재검증
+   * 오류도 같은 방식으로 포착
+   * 
+   * 차이점:
+   * 탐색이 아니라 URL이 변경되지 않고 기록 스택이 영향을 받음
+   */
+  
   let favorite = contact.favorite;
+
   return (
-    <Form method="post">
+    <fetcher.Form method="post">
       <button
         name="favorite"
         value={favorite ? "false" : "true"}
@@ -84,6 +108,6 @@ function Favorite({ contact }) {
       >
         {favorite ? "★" : "☆"}
       </button>
-    </Form>
+    </fetcher.Form>
   );
 }
