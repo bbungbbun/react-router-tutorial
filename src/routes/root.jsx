@@ -7,6 +7,7 @@ import {
   useNavigation,
 } from "react-router-dom";
 import { getContacts, createContact } from "../contacts";
+import { useEffect } from "react";
 
 export async function action() {
   const contact = await createContact();
@@ -42,6 +43,17 @@ export default function Root() {
   /**
    * useLoaderData 후크가 업데이트되고 UI가 자동으로 데이터와 동기화 상태를 유지
    */
+
+  useEffect(() => {
+    document.getElementById("q").value = q;
+  }, [q]); 
+
+  /**
+   * useEffect 후크를 활용하여
+   * 뒤로가기 버튼을 클릭했을 때 검색창에 이전에 검색했던 내용이 남는 문제 해결
+   * 검색창에 입력한 값을 URL 검색 파라미터와 동기화
+   */
+
     return (
       <>
         <div id="sidebar">
