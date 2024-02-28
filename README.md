@@ -13,7 +13,7 @@
 - 객체 대신 JSX로 경로를 생성하려는 경우 사용
 
 
-## <Form>
+## Form
 - 클라이언트 측 라우팅 및 데이터 변형을 위해 브라우저를 에뮬레이트하는 일반 HTML 양식을 둘러싼 래퍼
 - [데이터 라우터](https://reactrouter.com/en/main/routers/picking-a-router)를 사용하는 경우에만 작동
 - 렌더링된 useNavigation 후크에 대한 상태 업데이트를 트리거함
