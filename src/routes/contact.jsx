@@ -92,8 +92,16 @@ function Favorite({ contact }) {
    * 차이점:
    * 탐색이 아니라 URL이 변경되지 않고 기록 스택이 영향을 받음
    */
-  
+
   let favorite = contact.favorite;
+  if (fetcher.formData) {
+    favorite = fetcher.formData.get("favorite") === "true";
+  }
+  /**
+   * 낙관적 UI(optimistic UI)
+   * 네트워크가 완료되지 않은 경우에도 이를 사용하여 별의 상태를 즉시 업데이트
+   * 업데이트가 결국 실패하면 UI는 실제 데이터로 되돌아감
+   * */ 
 
   return (
     <fetcher.Form method="post">
