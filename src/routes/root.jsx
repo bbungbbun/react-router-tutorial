@@ -63,6 +63,18 @@ export default function Root() {
    * 검색창에 입력한 값을 URL 검색 파라미터와 동기화
    */
 
+  const searching =
+  navigation.location &&
+  new URLSearchParams(navigation.location.search).has(
+    "q"
+  ); // 검색 중일 때 검색 진행중임을 표시
+
+  /**
+   * Navigation.location
+   * 앱이 새 URL로 이동하고 이에 대한 데이터를 로드할 때 표시됨
+   * 그런 다음 더 이상 보류 중인 탐색이 없으면 사라짐
+  */
+
     return (
       <>
         <div id="sidebar">
@@ -74,6 +86,7 @@ export default function Root() {
                 * 클라이언트측 라우팅을 할 수 있게 된다 */}
               <input
                 id="q"
+                className={searching ? "loading" : ""}
                 aria-label="Search contacts"
                 placeholder="Search"
                 type="search"
@@ -86,7 +99,7 @@ export default function Root() {
               <div
                 id="search-spinner"
                 aria-hidden
-                hidden={true}
+                hidden={!searching}
               />
               <div
                 className="sr-only"
